@@ -18,7 +18,18 @@ class DestinationActivity : AppCompatActivity() {
         binding = ActivityDestinationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val fullName : String = intent.getStringExtra("fullName").toString()
+        val fullName = intent.getStringExtra("fullName") ?: "N/A"
+        val email = intent.getStringExtra("email") ?: "N/A"
+        val password = intent.getStringExtra("password") ?: "N/A"
+        val country = intent.getStringExtra("country") ?: "N/A"
+        val city = intent.getStringExtra("city") ?: "N/A"
+
+        binding.outFullname.text = "Full Name: $fullName"
+        binding.outEmail.text = "Email: $email"
+        binding.outGender.text = "Gender: "
+        binding.outCountry.text = "Country: $country"
+        binding.outCity.text = "City: $city"
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

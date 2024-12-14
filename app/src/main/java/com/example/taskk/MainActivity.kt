@@ -1,5 +1,6 @@
  package com.example.taskk
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -21,6 +22,11 @@ import com.example.taskk.databinding.ActivityMainBinding
     val countries = arrayOf("Nepal", "India", "USA", "UK", "Australia", "Germany")
 
     val cities = arrayOf("Kathmandu", "Butwal", "Bhaktapur", "Kritipur", "Bandipur", "Lalitpur", "Syangja")
+
+     var fullName : String = ""
+     var email : String = ""
+     var password : String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -51,7 +57,20 @@ import com.example.taskk.databinding.ActivityMainBinding
 
         binding.spinner.onItemSelectedListener = this
 
-
+        binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                binding.button.visibility = View.VISIBLE
+            } else {
+                binding.button.visibility = View.GONE
+                var intent = Intent(this@MainActivity, DestinationActivity::class.java)
+                intent.putExtra("fullName", fullName)
+                intent.putExtra("email", email)
+                intent.putExtra("password", password)
+                intent.putExtra("country", countries)
+                intent.putExtra("city", cities)
+                startActivity(intent)
+            }
+        }
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
